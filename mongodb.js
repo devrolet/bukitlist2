@@ -12,7 +12,9 @@ const databaseName = 'bukitlist2';
 
 const id = new ObjectID();
 console.log(id);
-console.log(id.getTimestamp());
+// console.log(id.id.length);
+// console.log(id.toHexString().length);
+// console.log(id.getTimestamp());
 
 MongoClient.connect(connectionURL, { useNewUrlParser: true, useUnifiedTopology: true }, (error, client) => {
   if(error) {
@@ -22,17 +24,16 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true, useUnifiedTopology: 
   const db = client.db(databaseName);
 
   // Insert One User
-  db.collection('users').insertOne({
-    _id: id,
-    name: 'Bryon',
-    age: 23
-  }, (error, result) => {
-    if(error) {
-      return console.log('Unable to insert user');
-    }
+  // db.collection('users').insertOne({
+  //   name: 'Bryon',
+  //   age: 23
+  // }, (error, result) => {
+  //   if(error) {
+  //     return console.log('Unable to insert user');
+  //   }
 
-    console.log(result.ops);
-  });
+  //   console.log(result.ops);
+  // });
 
   // Insert Many Users
   // db.collection('users').insertMany([
