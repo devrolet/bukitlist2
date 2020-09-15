@@ -12,9 +12,6 @@ const databaseName = 'bukitlist2';
 
 const id = new ObjectID();
 console.log(id);
-// console.log(id.id.length);
-// console.log(id.toHexString().length);
-// console.log(id.getTimestamp());
 
 MongoClient.connect(connectionURL, { useNewUrlParser: true, useUnifiedTopology: true }, (error, client) => {
   if(error) {
@@ -23,58 +20,33 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true, useUnifiedTopology: 
 
   const db = client.db(databaseName);
 
-  // Insert One User
-  // db.collection('users').insertOne({
-  //   name: 'Bryon',
-  //   age: 23
-  // }, (error, result) => {
+  // Find One Document
+  // db.collection('users').findOne({ _id: new ObjectID('5f5feff9863b246d34991eff') }, (error, user) => {
   //   if(error) {
-  //     return console.log('Unable to insert user');
+  //     return console.log('Unable to fetch');
   //   }
 
-  //   console.log(result.ops);
+  //   console.log(user);
   // });
 
-  // Insert Many Users
-  // db.collection('users').insertMany([
-  //   {
-  //     name: 'Cassandra',
-  //     age: 26
-  //   }, {
-  //     name: 'Angelia',
-  //     age: 16
-  //   }, {
-  //     name: 'Dion',
-  //     age: 7
-  //   }
-  // ], (error, result) => {
-  //   if(error) {
-  //     return console.log('Unable to insert documents');
-  //   }
-
-  //   console.log(result.ops);
+  // Find Multiple 
+   // db.collection('users').find({ age: 16 }).toArray((error, users) => {
+  //   console.log(users);
   // });
 
-  // Insert Many Tasks
-  // db.collection('tasks').insertMany([
-  //   {
-  //     description: 'Register LLC with Secretary of State Office',
-  //     completed: true
-  //   }, 
-  //   {
-  //     description: 'Open a business banking account',
-  //     completed: true
-  //   },
-  //   {
-  //     description: 'Register DBA statement with county clerk office',
-  //     completed: false
-  //   }
-  // ], (error, result) => {
-  //   if(error) {
-  //     return console.log('Unable to add tasks');
-  //   }
-
-  //   console.log('New Tasks added successfully...');
-  //   console.log(result.ops);
+  // db.collection('users').find({ age: 16 }).count((error, count) => {
+  //   console.log(count);
   // });
+
+  // Task Challenge
+  db.collection('tasks').findOne({_id: new ObjectID('5f5fc40a55ae6267d4bb41c2')}, (error, task) => {
+    if(error) {
+      return console.log('Unable to fetch task');
+    }
+    console.log(task);
+  });
+
+  db.collection('tasks').find({ completed: true } ).toArray((error, tasks) => {
+    console.log(tasks);
+  });
 });
