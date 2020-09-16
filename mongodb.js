@@ -20,33 +20,24 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true, useUnifiedTopology: 
 
   const db = client.db(databaseName);
 
-  // Find One Document
-  // db.collection('users').findOne({ _id: new ObjectID('5f5feff9863b246d34991eff') }, (error, user) => {
-  //   if(error) {
-  //     return console.log('Unable to fetch');
+  // db.collection('users').updateOne({
+  //   _id: new ObjectID('5f5fc40a55ae6267d4bb41be')
+  // }, {
+  //   $inc: {
+  //     age: 1
   //   }
-
-  //   console.log(user);
-  // });
-
-  // Find Multiple 
-   // db.collection('users').find({ age: 16 }).toArray((error, users) => {
-  //   console.log(users);
-  // });
-
-  // db.collection('users').find({ age: 16 }).count((error, count) => {
-  //   console.log(count);
-  // });
-
-  // Task Challenge
-  db.collection('tasks').findOne({_id: new ObjectID('5f5fc40a55ae6267d4bb41c2')}, (error, task) => {
-    if(error) {
-      return console.log('Unable to fetch task');
+  // }).then(result => console.log(result))
+  //   .catch(error => console.log(error));
+  
+  db.collection('tasks').updateMany({
+    completed: true
+  }, {
+    $set: {
+      completed: false
     }
-    console.log(task);
-  });
-
-  db.collection('tasks').find({ completed: true } ).toArray((error, tasks) => {
-    console.log(tasks);
+  }).then((result) => {
+    console.log(result);
+  }).catch((error) => {
+    console.log(error);
   });
 });
